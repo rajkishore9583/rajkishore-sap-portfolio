@@ -1,7 +1,8 @@
 # 🚀 Rajkishore Pradhan — 3D Portfolio Website
 
 > **SAP Technology Consultant & Software Engineer**  
-> Certified SAP Consultant | SAP S/4HANA • BTP • Python • SQL • Industrial Automation
+> Certified SAP Consultant | SAP S/4HANA • BTP • Python • SQL • Industrial Automation  
+> B.Tech (2024–2027) | Balasore College of Engineering and Technology (BCET)
 
 A complete, high-performance 3D-styled portfolio website replicating the purple neon glow aesthetic, featuring custom 3D Pixar/chibi-style developer mascots, interactive Order-to-Cash (O2C) case studies, and a seamless Dark/Light theme toggle.
 

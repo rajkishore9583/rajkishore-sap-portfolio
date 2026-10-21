@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Award, ExternalLink, GraduationCap, Sparkles, CheckCircle2, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
 import { certificationsData, educationData } from '../data/portfolioData';
 
@@ -9,8 +10,14 @@ export default function CertificationsEducation({ darkMode }) {
     <section id="certificates" className="relative py-20 lg:py-28 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3"
+        >
           <div 
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
               darkMode
@@ -30,10 +37,16 @@ export default function CertificationsEducation({ darkMode }) {
           <p className={`text-sm sm:text-base ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Accredited SAP Professional credentials, industrial automation mastery, and rigorous engineering foundations.
           </p>
-        </div>
+        </motion.div>
 
         {/* Two-Column Grid: Left Content (Certifications + Education) & Right Visual (male-cert.png) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center"
+        >
           
           {/* Left Column: Certifications List & Education Highlight */}
           <div className="lg:col-span-7 space-y-8 text-left">
@@ -48,16 +61,16 @@ export default function CertificationsEducation({ darkMode }) {
               </div>
 
               <div className="space-y-4">
-                {certificationsData.map((cert, index) => {
+                {certificationsData.map((cert) => {
                   const isSpecialization = !!cert.courses;
 
                   return (
                     <div
                       key={cert.title}
-                      className={`p-5 sm:p-6 rounded-2xl transition-all duration-300 ${
+                      className={`p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] ${
                         darkMode
-                          ? 'glass-dark border-purple-500/25 hover:border-purple-400/50 hover:shadow-glow-sm'
-                          : 'glass-light border-purple-200 hover:border-purple-300 hover:shadow-md'
+                          ? 'glass-dark border-purple-500/25 hover:border-purple-400/50'
+                          : 'glass-light border-purple-200 hover:border-purple-300'
                       }`}
                     >
                       {/* Top Header of Card */}
@@ -83,7 +96,8 @@ export default function CertificationsEducation({ darkMode }) {
                         </div>
 
                         {/* Verify Link */}
-                        <a
+                        <motion.a
+                          whileHover={{ scale: 1.08 }}
                           href={cert.badgeUrl}
                           target="_blank"
                           rel="noreferrer"
@@ -91,7 +105,7 @@ export default function CertificationsEducation({ darkMode }) {
                         >
                           <span>Verify</span>
                           <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
+                        </motion.a>
                       </div>
 
                       <p className={`text-xs sm:text-sm mt-2 ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
@@ -139,7 +153,7 @@ export default function CertificationsEducation({ darkMode }) {
               </div>
             </div>
 
-            {/* Education Highlight Subsection */}
+            {/* Education Highlight Subsection with B.Tech 2024-2027 */}
             <div className="space-y-4 pt-4">
               <div className="flex items-center gap-2">
                 <GraduationCap className="w-5 h-5 text-purple-400" />
@@ -150,9 +164,10 @@ export default function CertificationsEducation({ darkMode }) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {educationData.map((edu) => (
-                  <div
+                  <motion.div
                     key={edu.degree}
-                    className={`p-5 rounded-2xl transition-all duration-300 ${
+                    whileHover={{ y: -4 }}
+                    className={`p-5 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] ${
                       darkMode
                         ? 'glass-dark border-purple-500/20 hover:border-purple-400/40'
                         : 'glass-light border-purple-200 hover:border-purple-300'
@@ -180,37 +195,37 @@ export default function CertificationsEducation({ darkMode }) {
                     <p className={`text-xs mt-2 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                       {edu.highlight}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: male-cert.png with Soft Radial Glow Backdrop */}
+          {/* Right Column: male-cert.png (Seamless Floating Cutout with Soft Radial Glow) */}
           <div className="lg:col-span-5 relative flex items-center justify-center">
             
-            {/* Ambient Radial Glow */}
-            <div 
-              className="absolute w-[360px] sm:w-[420px] h-[360px] sm:h-[420px] rounded-full blur-[80px] -z-10 animate-pulse-glow"
-              style={{
-                background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, rgba(124, 58, 237, 0.25) 55%, transparent 75%)'
-              }}
-            />
+            {/* Soft Ambient Purple Radial Glow behind character */}
+            <div className="absolute w-[340px] sm:w-[400px] h-[340px] sm:h-[400px] bg-purple-600/25 blur-3xl rounded-full -z-10 pointer-events-none animate-pulse" />
 
-            {/* Mascot Container */}
-            <div className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-square flex items-center justify-center">
+            {/* Seamless Mascot Container (Zero square border, pure transparent cutout) */}
+            <motion.div 
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-square flex items-center justify-center"
+            >
               
-              {/* 3D Character Image (Graduation Cap & Gown with Diploma) */}
+              {/* 3D Character Image with Smooth Radial Mask */}
               <img
                 src="/images/male-cert.png"
                 alt="Rajkishore Pradhan - Certified SAP Consultant"
-                className="w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(124,58,237,0.4)] animate-float-slow select-none pointer-events-none"
+                className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_15px_30px_rgba(124,58,237,0.35)] [mask-image:radial-gradient(circle_at_center,black_55%,transparent_95%)] [-webkit-mask-image:radial-gradient(circle_at_center,black_55%,transparent_95%)]"
               />
 
               {/* Floating Badge 1: 7-Course Specialization */}
-              <div 
-                className={`absolute top-4 -left-4 sm:left-0 px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg backdrop-blur-md animate-float ${
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className={`absolute top-4 -left-4 sm:left-0 px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg backdrop-blur-md cursor-pointer transition-shadow hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] ${
                   darkMode 
                     ? 'bg-[#180d30]/90 border border-purple-500/40 text-purple-200' 
                     : 'bg-white/90 border border-purple-200 text-purple-900'
@@ -221,11 +236,12 @@ export default function CertificationsEducation({ darkMode }) {
                   <div className="text-[10px] uppercase font-bold text-purple-400">Accredited</div>
                   <div className="text-xs font-bold">7 Courses Passed</div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Floating Badge 2: Academic Excellence */}
-              <div 
-                className={`absolute bottom-6 -right-4 sm:right-0 px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg backdrop-blur-md animate-float-fast ${
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className={`absolute bottom-6 -right-4 sm:right-0 px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-lg backdrop-blur-md cursor-pointer transition-shadow hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] ${
                   darkMode 
                     ? 'bg-[#180d30]/90 border border-purple-500/40 text-purple-200' 
                     : 'bg-white/90 border border-purple-200 text-purple-900'
@@ -236,13 +252,13 @@ export default function CertificationsEducation({ darkMode }) {
                   <div className="text-[10px] uppercase font-bold text-purple-400">CUTM Distinction</div>
                   <div className="text-xs font-bold">CGPA: 8.81</div>
                 </div>
-              </div>
+              </motion.div>
 
-            </div>
+            </motion.div>
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

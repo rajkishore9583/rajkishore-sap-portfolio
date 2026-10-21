@@ -1,5 +1,6 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, Sparkles, CheckCircle2, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Briefcase, Calendar, MapPin, Sparkles, ChevronRight } from 'lucide-react';
 import { experienceData } from '../data/portfolioData';
 
 export default function Experience({ darkMode }) {
@@ -7,8 +8,14 @@ export default function Experience({ darkMode }) {
     <section id="experience" className="relative py-20 lg:py-28 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3"
+        >
           <div 
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
               darkMode
@@ -28,7 +35,7 @@ export default function Experience({ darkMode }) {
           <p className={`text-sm sm:text-base ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Cross-functional background across SAP functional consulting, software engineering, and high-stakes enterprise manufacturing quality.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Layout */}
         <div className="relative">
@@ -40,8 +47,12 @@ export default function Experience({ darkMode }) {
               const isEven = index % 2 === 0;
 
               return (
-                <div 
+                <motion.div 
                   key={exp.role} 
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
                   className={`relative flex flex-col md:flex-row items-center ${
                     isEven ? 'md:flex-row-reverse' : ''
                   }`}
@@ -54,10 +65,10 @@ export default function Experience({ darkMode }) {
                   {/* Content Card (Takes half the width) */}
                   <div className="w-full md:w-[calc(50%-2rem)]">
                     <div 
-                      className={`p-6 sm:p-7 rounded-3xl transition-all duration-300 hover:-translate-y-1 ${
+                      className={`p-6 sm:p-7 rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] ${
                         darkMode
-                          ? 'glass-dark border-purple-500/25 hover:border-purple-400/50 hover:shadow-glow'
-                          : 'glass-light border-purple-200 hover:border-purple-300 hover:shadow-lg'
+                          ? 'glass-dark border-purple-500/25 hover:border-purple-400/50'
+                          : 'glass-light border-purple-200 hover:border-purple-300'
                       }`}
                     >
                       {/* Top Badges: Type & Period */}
@@ -129,7 +140,7 @@ export default function Experience({ darkMode }) {
 
                   {/* Empty spacer on opposite side for desktop */}
                   <div className="hidden md:block md:w-[calc(50%-2rem)]" />
-                </div>
+                </motion.div>
               );
             })}
           </div>

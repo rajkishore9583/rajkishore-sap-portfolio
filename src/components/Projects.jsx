@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Sparkles, ArrowRight, Layers, BarChart3, Cpu, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, Sparkles } from 'lucide-react';
 import { projectsData } from '../data/portfolioData';
 import ProjectModal from './ProjectModal';
 
@@ -14,8 +15,14 @@ export default function Projects({ darkMode }) {
     <section id="projects" className="relative py-20 lg:py-28 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3"
+        >
           <div 
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
               darkMode
@@ -35,17 +42,24 @@ export default function Projects({ darkMode }) {
           <p className={`text-sm sm:text-base ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Explore real-world enterprise architectures, SAP business process simulations, and automated telemetry solutions.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 3-Card Carousel/Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 3-Card Carousel/Grid with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {projectsData.map((project) => (
-            <div
+            <motion.div
               key={project.id}
-              className={`rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-2 ${
+              whileHover={{ y: -8 }}
+              className={`rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] ${
                 darkMode
-                  ? 'glass-dark border-purple-500/25 hover:border-purple-400/60 hover:shadow-glow'
-                  : 'glass-light border-purple-200 hover:border-purple-300 hover:shadow-xl'
+                  ? 'glass-dark border-purple-500/25 hover:border-purple-400/60'
+                  : 'glass-light border-purple-200 hover:border-purple-300'
               }`}
             >
               <div>
@@ -56,7 +70,6 @@ export default function Projects({ darkMode }) {
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
-                      // Fallback if image fails to load
                       e.target.style.display = 'none';
                     }}
                   />
@@ -111,7 +124,9 @@ export default function Projects({ darkMode }) {
 
               {/* Action Buttons: Code & Live Demo */}
               <div className="p-6 pt-0 border-t border-purple-500/15 flex items-center justify-between gap-3 mt-4">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   href={project.codeUrl}
                   target="_blank"
                   rel="noreferrer"
@@ -123,21 +138,23 @@ export default function Projects({ darkMode }) {
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>Code</span>
-                </a>
+                </motion.a>
 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   type="button"
                   onClick={() => handleOpenDemo(project)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-glow-btn transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-glow-btn transition-all"
                 >
                   <span>Live Demo</span>
                   <ExternalLink className="w-3.5 h-3.5" />
-                </button>
+                </motion.button>
               </div>
 
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
 

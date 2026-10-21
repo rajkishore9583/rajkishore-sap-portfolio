@@ -170,16 +170,16 @@ export const educationData = [
     degree: "Bachelor of Technology (B.Tech)",
     field: "Engineering",
     institution: "Balasore College of Engineering and Technology (BCET)",
-    location: "Balasore, Odisha",
-    period: "2023 – 2026",
-    grade: "Pursuing",
+    location: "Balasore, Odisha, India",
+    period: "2024 – 2027",
+    grade: "Pursuing (Passing Year: 2027)",
     highlight: "Focus on Enterprise Computing, Automation & Industrial Systems"
   },
   {
     degree: "Diploma in Engineering",
     field: "Electrical Engineering",
     institution: "Centurion University of Technology and Management (CUTM)",
-    location: "Odisha",
+    location: "Odisha, India",
     period: "Completed",
     grade: "CGPA: 8.81",
     highlight: "Graduated with Distinction; strong foundation in circuit design, automation, and industrial control."

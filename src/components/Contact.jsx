@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Sparkles, CheckCircle2, MessageSquare, Copy, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, Sparkles, CheckCircle2, Copy, Check } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Contact({ darkMode }) {
@@ -18,7 +19,6 @@ export default function Contact({ darkMode }) {
     if (!formData.name || !formData.email || !formData.message) return;
 
     setLoading(true);
-    // Simulate real form submission
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
@@ -37,8 +37,14 @@ export default function Contact({ darkMode }) {
     <section id="contact" className="relative py-20 lg:py-28 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-14 space-y-3"
+        >
           <div 
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
               darkMode
@@ -58,36 +64,45 @@ export default function Contact({ darkMode }) {
           <p className={`text-sm sm:text-base ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Have an open SAP Technology Consultant role, enterprise project, or want to discuss digital transformation? I'd love to hear from you.
           </p>
-        </div>
+        </motion.div>
 
         {/* Two-Column Layout: Left Visual (male-contact.png) & Right Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center"
+        >
           
-          {/* Left Column: male-contact.png + Direct Contact Info Cards */}
+          {/* Left Column: male-contact.png (Seamless Floating Cutout with Soft Radial Glow) */}
           <div className="lg:col-span-5 flex flex-col items-center text-center space-y-6">
             
-            {/* Mascot Container with Radial Glow */}
+            {/* Mascot Container with Soft Ambient Purple Radial Glow */}
             <div className="relative w-[280px] sm:w-[340px] aspect-square flex items-center justify-center">
               
-              <div 
-                className="absolute inset-0 rounded-full blur-[70px] -z-10 animate-pulse-glow"
-                style={{
-                  background: 'radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, rgba(124, 58, 237, 0.2) 60%, transparent 75%)'
-                }}
-              />
+              <div className="absolute w-[260px] sm:w-[320px] h-[260px] sm:h-[320px] bg-purple-600/25 blur-3xl rounded-full -z-10 pointer-events-none animate-pulse" />
 
-              <img
-                src="/images/male-contact.png"
-                alt="Rajkishore Pradhan - Get in Touch Mascot"
-                className="w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(124,58,237,0.35)] animate-float-slow select-none pointer-events-none"
-              />
+              {/* Seamless Floating Character Animation */}
+              <motion.div 
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <img
+                  src="/images/male-contact.png"
+                  alt="Rajkishore Pradhan - Get in Touch Mascot"
+                  className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_15px_30px_rgba(124,58,237,0.35)] [mask-image:radial-gradient(circle_at_center,black_55%,transparent_95%)] [-webkit-mask-image:radial-gradient(circle_at_center,black_55%,transparent_95%)]"
+                />
+              </motion.div>
             </div>
 
-            {/* Quick Contact Info Chips */}
+            {/* Quick Contact Info Chips with Hover Lift */}
             <div className="w-full space-y-3">
               {/* Email */}
-              <div 
-                className={`p-3.5 rounded-2xl flex items-center justify-between transition-all ${
+              <motion.div 
+                whileHover={{ y: -3 }}
+                className={`p-3.5 rounded-2xl flex items-center justify-between transition-all hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] ${
                   darkMode 
                     ? 'glass-dark border-purple-500/20' 
                     : 'glass-light border-purple-200'
@@ -116,11 +131,12 @@ export default function Contact({ darkMode }) {
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
-              </div>
+              </motion.div>
 
               {/* Phone */}
-              <div 
-                className={`p-3.5 rounded-2xl flex items-center justify-between transition-all ${
+              <motion.div 
+                whileHover={{ y: -3 }}
+                className={`p-3.5 rounded-2xl flex items-center justify-between transition-all hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] ${
                   darkMode 
                     ? 'glass-dark border-purple-500/20' 
                     : 'glass-light border-purple-200'
@@ -140,11 +156,12 @@ export default function Contact({ darkMode }) {
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Location */}
-              <div 
-                className={`p-3.5 rounded-2xl flex items-center gap-3 transition-all ${
+              <motion.div 
+                whileHover={{ y: -3 }}
+                className={`p-3.5 rounded-2xl flex items-center gap-3 transition-all hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] ${
                   darkMode 
                     ? 'glass-dark border-purple-500/20' 
                     : 'glass-light border-purple-200'
@@ -159,19 +176,19 @@ export default function Contact({ darkMode }) {
                     {personalInfo.location}
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
             </div>
 
           </div>
 
-          {/* Right Column: Glassmorphic Contact Form */}
+          {/* Right Column: Glassmorphic Contact Form with Hover Shadow */}
           <div className="lg:col-span-7">
             <div 
-              className={`p-8 sm:p-10 rounded-3xl transition-all duration-300 relative ${
+              className={`p-8 sm:p-10 rounded-3xl transition-all duration-300 relative hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] ${
                 darkMode
-                  ? 'glass-dark border-purple-500/30 shadow-glow'
-                  : 'glass-light border-purple-200 shadow-xl'
+                  ? 'glass-dark border-purple-500/30'
+                  : 'glass-light border-purple-200'
               }`}
             >
               <h3 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-[#1e1b4b]'}`}>
@@ -256,11 +273,13 @@ export default function Contact({ darkMode }) {
                     />
                   </div>
 
-                  {/* Submit Button: Solid Purple */}
-                  <button
+                  {/* Submit Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={loading}
-                    className="w-full mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-glow-btn hover:shadow-glow transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+                    className="w-full mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-glow-btn hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] transition-all duration-300 disabled:opacity-60"
                   >
                     {loading ? (
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -270,14 +289,14 @@ export default function Contact({ darkMode }) {
                         <Send className="w-4 h-4" />
                       </>
                     )}
-                  </button>
+                  </motion.button>
                 </form>
               )}
 
             </div>
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

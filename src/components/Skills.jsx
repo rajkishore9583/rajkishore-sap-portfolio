@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Boxes, GitPullRequest, Code2, Sparkles, CheckCircle, Database, Layers, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Boxes, GitPullRequest, Code2, Sparkles, CheckCircle, Layers } from 'lucide-react';
 import { skillsData } from '../data/portfolioData';
 
 export default function Skills({ darkMode }) {
@@ -28,8 +29,14 @@ export default function Skills({ darkMode }) {
     <section id="skills" className="relative py-20 lg:py-28 overflow-hidden">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-12 space-y-3">
+        {/* Section Header with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col items-center text-center max-w-2xl mx-auto mb-12 space-y-3"
+        >
           <div 
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
               darkMode
@@ -53,33 +60,41 @@ export default function Skills({ darkMode }) {
           {/* Interactive Category Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 type="button"
                 onClick={() => setActiveTab(cat)}
                 className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                   activeTab === cat
-                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-glow-sm scale-105'
+                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)]'
                     : darkMode
                       ? 'bg-purple-950/40 text-purple-300/80 hover:text-white hover:bg-purple-900/40 border border-purple-500/20'
                       : 'bg-purple-50 text-purple-800 hover:bg-purple-100 border border-purple-200'
                 }`}
               >
                 {cat}
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Categorized Skills Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Categorized Skills Grid with Scroll Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+        >
           {filteredCategories.map((catGroup) => (
             <div
               key={catGroup.category}
-              className={`p-6 sm:p-7 rounded-3xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 ${
+              className={`p-6 sm:p-7 rounded-3xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] ${
                 darkMode
-                  ? 'glass-dark border-purple-500/25 hover:border-purple-400/50 hover:shadow-glow'
-                  : 'glass-light border-purple-200/80 hover:border-purple-300 hover:shadow-lg'
+                  ? 'glass-dark border-purple-500/25 hover:border-purple-400/50'
+                  : 'glass-light border-purple-200/80 hover:border-purple-300'
               }`}
             >
               <div>
@@ -142,7 +157,7 @@ export default function Skills({ darkMode }) {
 
             </div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

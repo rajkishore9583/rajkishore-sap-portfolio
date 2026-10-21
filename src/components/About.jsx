@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, Award, FolderKanban, ShieldCheck, Check, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Award, FolderKanban, ShieldCheck, Sparkles } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function About({ darkMode }) {
@@ -9,44 +10,37 @@ export default function About({ darkMode }) {
       className="relative py-20 lg:py-28 overflow-hidden"
     >
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+        >
           
-          {/* Left Visual: male-about.png inside glowing purple organic circle */}
+          {/* Left Visual: male-about.png (Seamless Floating Cutout with Soft Radial Glow) */}
           <div className="lg:col-span-5 relative flex items-center justify-center">
             
-            {/* Glowing Organic Violet Backdrop */}
-            <div className="relative w-[320px] sm:w-[380px] h-[320px] sm:h-[380px] flex items-center justify-center">
-              
-              {/* Outer Pulsing Glow */}
-              <div 
-                className="absolute inset-0 rounded-full blur-[60px] opacity-60 animate-pulse-glow"
-                style={{
-                  background: 'radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, rgba(124, 58, 237, 0.3) 60%, transparent 80%)'
-                }}
+            {/* Soft Ambient Purple Radial Glow behind character */}
+            <div className="absolute w-[320px] sm:w-[380px] h-[320px] sm:h-[380px] bg-purple-600/25 blur-3xl rounded-full -z-10 pointer-events-none animate-pulse" />
+
+            {/* Seamless Character Container (Zero square border, pure transparent cutout) */}
+            <motion.div 
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-[300px] sm:w-[360px] aspect-square flex items-center justify-center"
+            >
+              {/* 3D Character Image (Suit Pose) with Smooth Radial Gradient Mask */}
+              <img
+                src="/images/male-about.png"
+                alt="Rajkishore Pradhan - SAP Technology Consultant"
+                className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_15px_30px_rgba(124,58,237,0.35)] [mask-image:radial-gradient(circle_at_center,black_55%,transparent_95%)] [-webkit-mask-image:radial-gradient(circle_at_center,black_55%,transparent_95%)]"
               />
 
-              {/* Decorative Rotating Border Ring */}
-              <div className="absolute inset-2 rounded-full border border-dashed border-purple-400/30 animate-spin-slow pointer-events-none" />
-
-              {/* Solid Organic Background Circle */}
-              <div 
-                className={`relative w-[280px] sm:w-[340px] h-[280px] sm:h-[340px] rounded-full overflow-hidden flex items-end justify-center shadow-2xl ${
-                  darkMode 
-                    ? 'bg-gradient-to-b from-purple-900/40 via-[#180d30] to-[#0b0418] border-2 border-purple-500/40' 
-                    : 'bg-gradient-to-b from-purple-200 via-purple-100 to-white border-2 border-purple-300'
-                }`}
-              >
-                {/* 3D Character Image (Suit Pose) */}
-                <img
-                  src="/images/male-about.png"
-                  alt="Rajkishore Pradhan - SAP Technology Consultant"
-                  className="w-[90%] h-[90%] object-contain object-bottom drop-shadow-[0_15px_25px_rgba(124,58,237,0.4)] select-none hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
               {/* Floating Verified Badge */}
-              <div 
-                className={`absolute -bottom-2 right-4 px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-lg backdrop-blur-md ${
+              <motion.div 
+                whileHover={{ scale: 1.08 }}
+                className={`absolute bottom-2 right-4 px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-lg backdrop-blur-md cursor-pointer transition-shadow hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] ${
                   darkMode
                     ? 'bg-[#180d30]/95 border border-purple-500/40 text-purple-200'
                     : 'bg-white/95 border border-purple-200 text-purple-900'
@@ -54,8 +48,8 @@ export default function About({ darkMode }) {
               >
                 <ShieldCheck className="w-4 h-4 text-purple-400" />
                 <span className="text-xs font-bold">SAP Certified</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
           </div>
 
@@ -88,14 +82,15 @@ export default function About({ darkMode }) {
               {personalInfo.aboutDescription}
             </p>
 
-            {/* 3 Stat Counter Cards */}
+            {/* 3 Stat Counter Cards with Interactive Hover Glow */}
             <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               
               {/* Stat 1: SAP Certifications */}
-              <div 
-                className={`p-5 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+              <motion.div 
+                whileHover={{ y: -6 }}
+                className={`p-5 rounded-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] ${
                   darkMode 
-                    ? 'glass-dark border-purple-500/20 hover:border-purple-500/40 hover:shadow-glow-sm' 
+                    ? 'glass-dark border-purple-500/20 hover:border-purple-500/50' 
                     : 'glass-light border-purple-200 hover:border-purple-300'
                 }`}
               >
@@ -108,13 +103,14 @@ export default function About({ darkMode }) {
                 <p className={`text-xs sm:text-sm font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                   {personalInfo.stats[0].label}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Stat 2: Enterprise & Tech Projects */}
-              <div 
-                className={`p-5 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+              <motion.div 
+                whileHover={{ y: -6 }}
+                className={`p-5 rounded-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] ${
                   darkMode 
-                    ? 'glass-dark border-purple-500/20 hover:border-purple-500/40 hover:shadow-glow-sm' 
+                    ? 'glass-dark border-purple-500/20 hover:border-purple-500/50' 
                     : 'glass-light border-purple-200 hover:border-purple-300'
                 }`}
               >
@@ -127,13 +123,14 @@ export default function About({ darkMode }) {
                 <p className={`text-xs sm:text-sm font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                   {personalInfo.stats[1].label}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Stat 3: Process Compliance */}
-              <div 
-                className={`p-5 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+              <motion.div 
+                whileHover={{ y: -6 }}
+                className={`p-5 rounded-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] ${
                   darkMode 
-                    ? 'glass-dark border-purple-500/20 hover:border-purple-500/40 hover:shadow-glow-sm' 
+                    ? 'glass-dark border-purple-500/20 hover:border-purple-500/50' 
                     : 'glass-light border-purple-200 hover:border-purple-300'
                 }`}
               >
@@ -146,24 +143,26 @@ export default function About({ darkMode }) {
                 <p className={`text-xs sm:text-sm font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                   {personalInfo.stats[2].label}
                 </p>
-              </div>
+              </motion.div>
 
             </div>
 
-            {/* CTA Button: Let's Talk -> */}
+            {/* CTA Button: Let's Talk -> with Hover Glow */}
             <div className="pt-2">
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href="#contact"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-glow-btn hover:shadow-glow transition-all duration-300 hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-glow-btn hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] transition-all duration-300"
               >
                 <span>Let's Talk</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </motion.a>
             </div>
 
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );
